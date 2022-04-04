@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lpmarket">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name=".GlobalApplication"
         android:allowBackup="true"
@@ -13,18 +11,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LpMarket">
         <activity
+            android:name=".AuthCodeHandlerActivity"
+            android:exported="true">
+
+            <!-- Redirect URI : "kakao{NATIVE_APP_KEY}://auth" -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
+                <data android:host="oauth"
+                    android:scheme="@string/kakao_native_key" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:hot="oauth"
-                    android:scheme="5e6e4fd890596b510cccf297bbb4ed07" />
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
